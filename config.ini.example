@@ -1,0 +1,5 @@
+[bot]
+Username = Somebotname
+# IDs and not names, can be instead set with commands
+FAFLiveTokenChannel = 8434325manynumbers
+FAFLiveTokenRole = 8743435manynumbers
