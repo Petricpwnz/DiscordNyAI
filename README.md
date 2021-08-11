@@ -6,4 +6,4 @@ make sure you have pipenv installed
 
 configure the config and .env files
 
-pipenv run python NyAI.py
+pipenv run python bot.py
