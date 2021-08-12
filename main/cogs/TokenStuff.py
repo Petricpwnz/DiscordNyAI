@@ -23,7 +23,7 @@ class TokenStuff(commands.Cog):
 
     @commands.command(name='registertokenchannel')
     @commands.guild_only()
-    @commands.has_permissions(administrator=True)
+    @commands.check_any(commands.has_permissions(administrator=True), commands.is_owner())
     async def registerTokenChannel(self, ctx, id=None):
         config = shared.get_config()
         try:
@@ -42,7 +42,7 @@ class TokenStuff(commands.Cog):
 
     @commands.command(name='registertokenrole')
     @commands.guild_only()
-    @commands.has_permissions(administrator=True)
+    @commands.check_any(commands.has_permissions(administrator=True), commands.is_owner())
     async def registerTokenRole(self, ctx, id=None):
         config = shared.get_config()
         try:

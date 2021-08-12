@@ -32,7 +32,7 @@ async def on_command_error(ctx, error):
 
 # COMMANDS
 @bot.command()
-@commands.has_permissions(administrator=True)
+@commands.check_any(commands.has_permissions(administrator=True), commands.is_owner())
 async def load(ctx, cog=None):
     if cog:
         try:
@@ -46,7 +46,7 @@ async def load(ctx, cog=None):
 
 
 @bot.command()
-@commands.has_permissions(administrator=True)
+@commands.check_any(commands.has_permissions(administrator=True), commands.is_owner())
 async def unload(ctx, cog=None):
     if cog:
         try:
@@ -60,7 +60,7 @@ async def unload(ctx, cog=None):
 
 
 @bot.command(name='reloadall')
-@commands.has_permissions(administrator=True)
+@commands.check_any(commands.has_permissions(administrator=True), commands.is_owner())
 async def reloadAll(ctx, cog=None):
     for cog in COGS:
         try:

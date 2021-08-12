@@ -13,22 +13,24 @@ class GenericCommands(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    @commands.check_any(commands.has_role(int(shared.get_config()['bot']['FAFLiveTokenRole'])), commands.has_permissions(administrator=True))
+    @commands.check_any(commands.has_permissions(administrator=True), commands.is_owner())
     @commands.guild_only()
     async def ping(self, ctx):
         await ctx.send('Still here')
 
     @commands.command(name='shutdown')
-    @commands.has_permissions(administrator=True)
+    @commands.check_any(commands.has_permissions(administrator=True), commands.is_owner())
     async def shutDown(self, ctx):
         text = 'Shutting the bot down'
         try:
             GClogger.info(text)
             await ctx.send(text)
+            await ctx.bot.logout()
             sys.exit()
         except Exception:
             GClogger.info(text)
             await ctx.send(text)
+            await ctx.bot.logout()
             sys.exit()
 
 
