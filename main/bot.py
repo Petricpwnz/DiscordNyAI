@@ -41,8 +41,9 @@ async def load(ctx, cog=None):
             logger.info(text)
             await ctx.send(text)
         except Exception as e:
-            logger.warning(f'Failed to load the {cog} cog. {str(e)}')
-            await ctx.send(f'Failed to load the {cog} cog.')
+            text = f'Failed to load the {cog} cog.'
+            logger.warning(f'{text} {str(e)}')
+            await ctx.send(text)
 
 
 @bot.command()
@@ -55,8 +56,9 @@ async def unload(ctx, cog=None):
             logger.info(text)
             await ctx.send(text)
         except Exception as e:
-            logger.warning(f'Failed to unload the {cog} cog. {str(e)}')
-            await ctx.send(f'Failed to unload the {cog} cog.')
+            text = f'Failed to unload the {cog} cog.'
+            logger.warning(f'{text} {str(e)}')
+            await ctx.send(text)
 
 
 @bot.command(name='reloadall')
@@ -69,8 +71,9 @@ async def reloadAll(ctx, cog=None):
             logger.info(text)
             await ctx.send(text)
         except Exception as e:
-            logger.warning(f'Failed to reload the {cog} cog. {str(e)}')
-            await ctx.send(f'Failed to reload the {cog} cog.')
+            text = f'Failed to reload the {cog} cog.'
+            logger.warning(f'{text} {str(e)}')
+            await ctx.send(text)
 
 
 # OTHER
