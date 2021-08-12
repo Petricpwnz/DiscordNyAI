@@ -1,4 +1,4 @@
-import configobj
+import shared
 
 from discord.ext import commands
 
@@ -6,7 +6,6 @@ from modules.twoFA import get_token
 from modules.utils import create_logger
 from modules.decorators import *
 
-config = configobj.ConfigObj(r'../config.ini')
 TSlogger = create_logger('token_stuff', 'info', 'data/logs/')
 
 
@@ -14,13 +13,10 @@ class TokenStuff(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    FAFLive_token_role = int(config['bot']['FAFLiveTokenRole'])
-    FAFLive_token_channel = int(config['bot']['FAFLiveTokenChannel'])
-
     @commands.command(name='token')
-    @commands.has_role(FAFLive_token_role)
     @commands.guild_only()
     @commands.check(FAFLive_2fa_channel)
+    @custom_has_roles({'faflive'})
     async def getToken(self, ctx):
         TSlogger.info(f'Sent a token by request of {ctx.author.name}, id {ctx.author.id}')
         await ctx.send(get_token())
@@ -29,6 +25,7 @@ class TokenStuff(commands.Cog):
     @commands.guild_only()
     @commands.has_permissions(administrator=True)
     async def registerTokenChannel(self, ctx, id=None):
+        config = shared.get_config()
         try:
             channel_id = int(id) or ctx.channel.id
         except Exception:
@@ -47,6 +44,7 @@ class TokenStuff(commands.Cog):
     @commands.guild_only()
     @commands.has_permissions(administrator=True)
     async def registerTokenRole(self, ctx, id=None):
+        config = shared.get_config()
         try:
             FAFLive_token_role = int(id)
             config['bot']['FAFLiveTokenRole'] = FAFLive_token_role

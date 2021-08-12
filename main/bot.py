@@ -1,17 +1,13 @@
 import os
-import configobj
+
 
 from dotenv import load_dotenv
 from discord.ext import commands
 from modules.utils import create_logger
+import shared
 
-# TODO cant pass config as argument to cogs so import there again, figure out how to use the package=None arg for setup function to maybe fix this
-try:
-    config = configobj.ConfigObj(r'../config.ini')
-    BOT_NAME = config['bot']['Username']
-except Exception as e:
-    print(f'Failed parsing config.ini {str(e)}')
-    BOT_NAME = 'Somebotname'
+config = shared.get_config()
+BOT_NAME = config['bot']['Username']
 
 logger = create_logger(BOT_NAME, 'info', 'data/logs/')
 
